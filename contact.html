@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kontakt oss • RebootUB</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+          <img src="images/logo.png" alt="RebootUB logo"><span class="fw-bold">RebootUB</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="nav" class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link " href="index.html">Forside</a></li>
+            <li class="nav-item"><a class="nav-link " href="about.html">Om oss</a></li>
+            <li class="nav-item"><a class="nav-link " href="team.html">Team</a></li>
+            <li class="nav-item"><a class="nav-link " href="store.html">Butikk</a></li>
+            <li class="nav-item"><a class="nav-link " href="prices.html">Priser</a></li>
+            <li class="nav-item"><a class="nav-link active" href="contact.html">Kontakt oss</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+<main>
+<section class="py-5">
+  <div class="container">
+    <h1 class="h3 mb-3">Kontakt oss</h1>
+    <div class="row g-4">
+      <div class="col-lg-6">
+        
+<form id="contact-form" method="POST" action="/api/contact">
+  <div class="mb-3"><label class="form-label">Navn</label><input name="name" class="form-control" required placeholder="Ditt navn"></div>
+  <div class="mb-3"><label class="form-label">Telefon eller e‑post (for kvittering)</label><input name="contact" class="form-control" required placeholder="+47 ... / navn@mail.com"></div>
+  <div class="mb-3"><label class="form-label">Melding</label><textarea name="message" class="form-control" rows="5" required placeholder="Beskriv problemet kort"></textarea></div>
+  <button class="btn btn-primary" type="submit">Send</button>
+  <p id="form-status" class="mt-3 text-success d-none">Takk! Vi kontakter deg snart.</p>
+  <p id="form-error" class="mt-3 text-danger d-none">Noe gikk galt. Prøv igjen.</p>
+</form>
+
+      </div>
+      <div class="col-lg-6">
+        <div class="p-3 bg-light rounded">
+          <h5>Rask kontakt</h5>
+          <p class="mb-1">E-post: <a href="mailto:rebootubdrm@gmail.com">rebootubdrm@gmail.com</a></p>
+          <p class="mb-0">Adresse: Betzy Kjelsbergs vei 280, 3028 Drammen</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="container text-center">
+      <p class="mb-0">&copy; RebootUB, 2025 • Reparasjon av telefoner og datamaskiner</p>
+    </div></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData(form);
+  const res = await fetch(form.action, { method: 'POST', body: data });
+  if (res.ok) {
+    document.getElementById('form-status').classList.remove('d-none');
+    document.getElementById('form-error').classList.add('d-none');
+    form.reset();
+  } else {
+    document.getElementById('form-status').classList.add('d-none');
+    document.getElementById('form-error').classList.remove('d-none');
+  }
+});
+</script>
+</body>
+</html>
